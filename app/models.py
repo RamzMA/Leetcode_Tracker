@@ -1,14 +1,19 @@
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String
+from app.database import Base
 
-class Problem(BaseModel):
-    title: str
-    difficulty: str
-    status: str
-    topic: str
+class User(Base):
+    __tablename__ = 'users'
 
-class Stats(BaseModel):
-    total: int
-    easy: int
-    medium: int
-    hard: int
- 
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, index=True)
+    username = Column(String)
+    password = Column(String)
+
+class Problem(Base):
+    __tablename__ = 'problems'
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, unique=True)
+    difficulty = Column(String)
+    status = Column(String)
+    topic = Column(String)
