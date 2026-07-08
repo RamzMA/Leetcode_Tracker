@@ -4,6 +4,7 @@ from app.models import User
 from app.schemas import UserCreate, UserLogin
 from sqlalchemy.orm import Session
 from app.database import get_db
+from app.token import create_access_token
 
 
 routerAuth = APIRouter()
@@ -30,17 +31,31 @@ def login(
     db : Session = Depends(get_db)
     ):
     user = (
-        db.query(User).filter(User.username == login_details.username).first()
+        db.query(User).filter(User.email == login_details.email).first()
     )
 
     if not user:
-        return {'message': 'Invalid Credentials!'}
+        raise HTTPException(
+            status_code=401,
+            detail='Invalid Credentials'
+        )
     
     if not verify_password(login_details.password, user.hashed_password):
-        return {'message': 'Invalid Password'}
+        raise HTTPException(
+            status_code=401,
+            detail='Invalid Password'
+        )
+
+    token = create_access_token(
+        {
+            'sub': str(user.id),
+            'username': user.username
+        }
+    )
     
     return {
-        'message': 'Login Successful'
+        'access_token': token,
+        'token_type': 'bearer'
     }
 
 
