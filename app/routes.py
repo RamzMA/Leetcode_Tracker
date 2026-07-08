@@ -7,7 +7,7 @@ from app.schemas import ProblemCreate
 
 router = APIRouter()
 
-#problems
+#----------------------------------------        Problems        ----------------------------------------
 @router.get('/problems')
 def get_problems(db: Session = Depends(get_db)):
     return db.query(Problem).all()
@@ -29,3 +29,8 @@ def create_problem(
     db.refresh(db_problem)
 
     return db_problem
+
+#----------------------------------------        Stats        ----------------------------------------
+@router.get('/stats/{user_id}')
+def get_stats(db: Session = Depends(get_db)):
+    return db.query(Stats).all
