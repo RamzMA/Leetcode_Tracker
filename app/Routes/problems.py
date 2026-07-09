@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.models import Problem
+from app.Security.dependencies import get_current_user
+from app.Models.models import Problem, User
 from app.database import get_db
-from app.schemas import ProblemCreate
+from app.Schemas.schemas import ProblemCreate
 
 routerProblems = APIRouter(
     prefix='',
@@ -12,7 +13,7 @@ routerProblems = APIRouter(
 
 #----------------------------------------        Problems        ----------------------------------------
 @routerProblems.get('/problems')
-def get_problems(db: Session = Depends(get_db)):
+def get_problems(current_user: User = Depends(get_current_user) ,db: Session = Depends(get_db)):
     return db.query(Problem).all()
 
 @routerProblems.post('/problems')

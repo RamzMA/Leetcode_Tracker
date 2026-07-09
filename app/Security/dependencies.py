@@ -2,8 +2,8 @@ from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.models import User
-from app.token import oauth2_scheme, verify_token
+from app.Models.models import User
+from app.Security.token import oauth2_scheme, verify_token
 
 
 def get_current_user(

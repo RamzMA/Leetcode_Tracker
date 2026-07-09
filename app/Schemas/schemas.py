@@ -24,9 +24,12 @@ class ProblemCreate(BaseModel):
     status: str
     topic: str
 
-class ProblemResponse(ProblemCreate):
+class UserProblemResponse(BaseModel):
     id: int
+    status: str
+    attempts: int
+    favorite: bool
+    problem: ProblemResponse
 
-    model_config = {
-        'from_attributes': True
-    }
+    class Config:
+        from_attributes = True

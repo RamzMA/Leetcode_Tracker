@@ -1,5 +1,16 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    ForeignKey,
+    Text,
+    Boolean,
+    DateTime
+)
+
+from sqlalchemy.orm import relationship
 from app.database import Base
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -15,5 +26,6 @@ class Problem(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, unique=True)
     difficulty = Column(String)
-    status = Column(String)
     topic = Column(String)
+
+    user_problems = relationship('UserProblem', back_populates='problem')
