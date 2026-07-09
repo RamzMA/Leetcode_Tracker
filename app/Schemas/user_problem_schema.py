@@ -1,7 +1,13 @@
 from pydantic import BaseModel
+from typing import Optional
+from datetime import datetime
+
+from app.Schemas.schemas import ProblemResponse
+
 
 class UserProblemCreate(BaseModel):
     problem_id: int
+
 
 class UserProblemUpdate(BaseModel):
     status: Optional[str] = None
@@ -20,8 +26,6 @@ class UserProblemResponse(BaseModel):
     favorite: bool
     problem: ProblemResponse
 
-    class Config:
-        from_attributes = True
-
-    class Config:
-        from_attributes = True
+    model_config = {
+        "from_attributes": True
+    }

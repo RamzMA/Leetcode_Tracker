@@ -1,13 +1,16 @@
 from pydantic import BaseModel, EmailStr
 
+
 class UserCreate(BaseModel):
     email: EmailStr
     username: str
     password: str
 
+
 class UserLogin(BaseModel):
     email: str
     password: str
+
 
 class UserResponse(BaseModel):
     id: int
@@ -15,8 +18,9 @@ class UserResponse(BaseModel):
     username: str
 
     model_config = {
-        'from_attributes': True
+        "from_attributes": True
     }
+
 
 class ProblemCreate(BaseModel):
     title: str
@@ -24,12 +28,13 @@ class ProblemCreate(BaseModel):
     status: str
     topic: str
 
-class UserProblemResponse(BaseModel):
-    id: int
-    status: str
-    attempts: int
-    favorite: bool
-    problem: ProblemResponse
 
-    class Config:
-        from_attributes = True
+class ProblemResponse(BaseModel):
+    id: int
+    title: str
+    difficulty: str
+    topic: str
+
+    model_config = {
+        "from_attributes": True
+    }

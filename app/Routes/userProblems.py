@@ -3,6 +3,7 @@ from app.Security.dependencies import get_current_user
 from app.database import get_db
 
 from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
 from app.Schemas.user_problem_schema import UserProblemCreate, UserProblemResponse, UserProblemUpdate
 from app.Models.user_problem_models import UserProblem

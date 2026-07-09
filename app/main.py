@@ -20,10 +20,6 @@ app = FastAPI(
         {
             'name': 'Problems',
             'description': 'Leetcode Problems'
-        },
-        {
-            'name': 'user Problems:',
-            'description': 'Users leetcodes'
         }
     ]
 )

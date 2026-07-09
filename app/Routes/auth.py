@@ -1,7 +1,7 @@
 from app.Security.encryption import hash_password, verify_password
 from fastapi import APIRouter, Depends
-from app.models import User
-from app.schemas import UserCreate, UserLogin
+from app.Models.models import User
+from app.Schemas.schemas import UserCreate, UserLogin
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.Security.token import create_access_token

@@ -9,6 +9,8 @@ from sqlalchemy import (
 )
 
 from app.database import Base
+from sqlalchemy.orm import relationship
+
 
 class UserProblem(Base):
     __tablename__ = 'user_problems'
@@ -25,4 +27,4 @@ class UserProblem(Base):
     rating = Column(Integer)  # user rating 
     favorite = Column(Boolean, default=False)
 
-    problem = relationship("Problem", back_populates="user_problem")
+    problem = relationship("Problem", back_populates="user_problems")
