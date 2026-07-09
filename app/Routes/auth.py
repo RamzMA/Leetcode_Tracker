@@ -1,13 +1,16 @@
-from app.encryption import hash_password, verify_password
+from app.Security.encryption import hash_password, verify_password
 from fastapi import APIRouter, Depends
 from app.models import User
 from app.schemas import UserCreate, UserLogin
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.token import create_access_token
+from app.Security.token import create_access_token
 
 
-routerAuth = APIRouter()
+routerAuth = APIRouter(
+    prefix='',
+    tags=['Auth']
+)
 
 @routerAuth.post('/register')
 def register(user: UserCreate, db: Session = Depends(get_db)):
